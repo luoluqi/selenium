@@ -4,5 +4,5 @@ class Base():
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.get(url)
-        self.driver.implicitly_wait(30)
+        self.driver.implicitly_wait(5)
    
