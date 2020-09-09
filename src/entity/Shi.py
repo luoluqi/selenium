@@ -46,7 +46,7 @@ class Shi(Base):
         name = self.driver.find_element_by_css_selector('.title h1').text
       
 
-        self.bookId = self.wechat.addBook(name=name, categoryId=name, author='', desc='', order=1)
+        self.bookId = self.wechat.addBook(name=name, categoryId=categoryId, author='', desc='', order=1)
 
     def getChater(self):    
         # 名称
