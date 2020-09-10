@@ -95,7 +95,7 @@ class Wechat():
         query = query.format(bookId=bookId, name=name, original=original, translation=translation\
             , order=order)
         res = self.databaseAdd(query)
-        print(query)
+       
         print('add chapter', res)
         # return res['id_list'][0]
 

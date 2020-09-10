@@ -10,6 +10,9 @@ class Shi(Base):
     wechat = Wechat()
     bookId = ''
     categoryId = ''
+
+    product = True
+
     def __init__(self, url, categoryId):
         Base.__init__(self, url)
         self.categoryId = categoryId
@@ -45,8 +48,11 @@ class Shi(Base):
     def getBook(self, categoryId):
         name = self.driver.find_element_by_css_selector('.title h1').text
       
+        if self.product:
 
-        self.bookId = self.wechat.addBook(name=name, categoryId=categoryId, author='', desc='', order=1)
+            self.bookId = self.wechat.addBook(name=name, categoryId=categoryId, author='', desc='', order=1)
+        else:
+            print(name)
 
     def getChater(self):    
         # 名称
@@ -54,6 +60,8 @@ class Shi(Base):
        
         # 作者来源
         author = self.driver.find_element_by_css_selector('.source').text
+
+        
        
         # 原文
         if (self.isElementExist("#sonsyuanwen [alt='译文']")):
@@ -65,7 +73,7 @@ class Shi(Base):
         else:
             pass
         yuanWen = self.driver.find_element_by_css_selector('.contson ').get_attribute('innerHTML')
-        
+        yuanWen = self.clearStr(yuanWen)
        
         # 译文
         if (self.isElementExist("div[id^='fanyi'] a:last-child")):
@@ -77,11 +85,13 @@ class Shi(Base):
             el = self.driver.find_elements_by_css_selector(".contyishang")[0]
           
         yiWen = el.get_attribute('outerHTML')
+        yiWen = self.clearStr(yiWen)
 
         # 赏析
         self.driver.find_element_by_css_selector("div[id^='shangxi'] a:last-child").click()
         el = WebDriverWait(self.driver, 30, 0.2).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[id^='shangxiquan'] .contyishang")))
         shangXi = el.get_attribute('outerHTML')
+        shangxi = self.clearStr(shangXi)
        
         # 写作手法
         # self.driver.find_element_by_css_selector('#shangxi3  a:last-child').click()
@@ -100,10 +110,21 @@ class Shi(Base):
                 <div >{shangXi}</div>
             </div>
         '''
+
+       
         original = original.format(name=name, author=author, yuanWen=yuanWen, yiWen=yiWen,\
             shangXi=shangXi)
-        self.wechat.addChapter(bookId=self.bookId, name=name, original=original,translation='',order=1)
+        if self.product:
+            chapterName = name + '（'+author+'）'
+            self.wechat.addChapter(bookId=self.bookId, name=chapterName, original=original,translation='',order=1)
+        else:
+            print(original)
 
-        
+    def clearStr(self, str):
+        str = str.replace('\r', '')
+        str = str.replace('\n', '')
+        # str = str.replace('"', '“')
+        # str = str.replace("'", "‘")
+        return str
            
         
