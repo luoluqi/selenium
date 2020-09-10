@@ -4,8 +4,8 @@ import json
 class Wechat():
     appId = 'wx5da44835dac1892e'
     appSecret = '6e75d11d9964510f2d86218839ffe1c9'
-    # env = 'book-e9sdz'
-    env = 'test-bggil'
+    env = 'book-e9sdz'
+    # env = 'test-bggil'
     access_token = ''
 
     def __init__(self):
@@ -14,8 +14,8 @@ class Wechat():
     def clearStr(self, str):
         str = str.replace('\r', '')
         str = str.replace('\n', '')
-        str = str.replace('"', "”")
-        str = str.replace("'", "”")
+        # str = str.replace('"', '\'')
+        str = str.replace('"', '\\\\"')
         return str
 
     def getAccessToken(self):
@@ -95,6 +95,7 @@ class Wechat():
         query = query.format(bookId=bookId, name=name, original=original, translation=translation\
             , order=order)
         res = self.databaseAdd(query)
+        print(query)
         print('add chapter', res)
         # return res['id_list'][0]
 
@@ -110,7 +111,7 @@ class Wechat():
         headers = {'content-type': 'application/json'}
         res = requests.post(url, data=data, headers=headers)
 
-        query = 'db.collection("chapter").where({bookId:"{bookId}"}).remove()'
+        query = 'db.collection("chapter").where({{bookId:"{bookId}"}}).remove()'
         query = query.format(bookId=bookId)
         data = json.dumps({
             'env': self.env,

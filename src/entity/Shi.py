@@ -90,14 +90,14 @@ class Shi(Base):
        
 
         original = '''
-            <div style="padding:0px 10px;">
-                <h1 style="margin:20px 0">{name}</h1>
-                <div style="margin:20px 0;color: #b12222;">{author}</div>
-                <div style="margin:20px 0">{yuanWen}</div>
+            <div >
+                <h1 >{name}</h1>
+                <div style="color: #b12222;">{author}</div>
+                <div >{yuanWen}</div>
                
-                <div style="margin:20px 0">{yiWen}</div>
+                <div >{yiWen}</div>
                
-                <div style="margin:20px 0">{shangXi}</div>
+                <div >{shangXi}</div>
             </div>
         '''
         original = original.format(name=name, author=author, yuanWen=yuanWen, yiWen=yiWen,\
