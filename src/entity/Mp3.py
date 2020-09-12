@@ -15,6 +15,7 @@ class Mp3(Base):
     url = ''
     def __init__(self, url, path):
         self.url = url
+        self.path = path
 
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
@@ -65,7 +66,7 @@ class Mp3(Base):
 
         response = requests.get(src).content
         # 以二进制的形式写入文件中
-        f = open(r'E:\music\{}.mp3'.format(name), 'wb')
+        f = open(self.path + r'\{}'.format(name), 'wb')
         f.write(response)
         f.close()
 
