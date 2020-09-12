@@ -8,12 +8,9 @@ categoryId = 'b05d218a5ec9cabb001a96dd05a4c619'
 
 tangshi = 'https://so.gushiwen.cn/gushi/tangshi.aspx'
 
-shi = Shi('https://so.gushiwen.cn/gushi/songsan.aspx', categoryId)
+shi = Shi(shijing, categoryId)
 shi.start()
-shi = Shi('https://so.gushiwen.cn/gushi/sanbai.aspx', categoryId)
-shi.start()
-shi = Shi('https://so.gushiwen.cn/gushi/songci.aspx', categoryId)
-shi.start()
+
 
 
 

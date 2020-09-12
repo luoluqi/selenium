@@ -4,8 +4,8 @@ import json
 class Wechat():
     appId = 'wx5da44835dac1892e'
     appSecret = '6e75d11d9964510f2d86218839ffe1c9'
-    env = 'book-e9sdz'
-    # env = 'test-bggil'
+    # env = 'book-e9sdz'
+    env = 'test-bggil'
     access_token = ''
 
     def __init__(self):

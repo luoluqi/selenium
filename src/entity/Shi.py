@@ -76,22 +76,22 @@ class Shi(Base):
         yuanWen = self.clearStr(yuanWen)
        
         # 译文
-        if (self.isElementExist("div[id^='fanyi'] a:last-child")):
-            aEl = self.driver.find_element_by_css_selector("div[id^='fanyi'] a:last-child")
-            aEl.click()
-            el = WebDriverWait(self.driver, 30, 0.2).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[id^='fanyiquan'] .contyishang")))
+        # if (self.isElementExist("div[id^='fanyi'] a:last-child")):
+        #     aEl = self.driver.find_element_by_css_selector("div[id^='fanyi'] a:last-child")
+        #     aEl.click()
+        #     el = WebDriverWait(self.driver, 30, 0.2).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[id^='fanyiquan'] .contyishang")))
             
-        else:
-            el = self.driver.find_elements_by_css_selector(".contyishang")[0]
+        # else:
+        #     el = self.driver.find_elements_by_css_selector(".contyishang")[0]
           
-        yiWen = el.get_attribute('outerHTML')
-        yiWen = self.clearStr(yiWen)
+        # yiWen = el.get_attribute('outerHTML')
+        # yiWen = self.clearStr(yiWen)
 
         # 赏析
-        self.driver.find_element_by_css_selector("div[id^='shangxi'] a:last-child").click()
-        el = WebDriverWait(self.driver, 30, 0.2).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[id^='shangxiquan'] .contyishang")))
-        shangXi = el.get_attribute('outerHTML')
-        shangxi = self.clearStr(shangXi)
+        # self.driver.find_element_by_css_selector("div[id^='shangxi'] a:last-child").click()
+        # el = WebDriverWait(self.driver, 30, 0.2).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[id^='shangxiquan'] .contyishang")))
+        # shangXi = el.get_attribute('outerHTML')
+        # shangxi = self.clearStr(shangXi)
        
         # 写作手法
         # self.driver.find_element_by_css_selector('#shangxi3  a:last-child').click()
@@ -105,15 +105,12 @@ class Shi(Base):
                 <div style="color: #b12222;">{author}</div>
                 <div >{yuanWen}</div>
                
-                <div >{yiWen}</div>
                
-                <div >{shangXi}</div>
             </div>
         '''
 
        
-        original = original.format(name=name, author=author, yuanWen=yuanWen, yiWen=yiWen,\
-            shangXi=shangXi)
+        original = original.format(name=name, author=author, yuanWen=yuanWen)
         if self.product:
             chapterName = name + '（'+author+'）'
             self.wechat.addChapter(bookId=self.bookId, name=chapterName, original=original,translation='',order=1)
