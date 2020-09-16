@@ -1,4 +1,4 @@
 from src.util.Wechat import Wechat
 
 w = Wechat()
-w.removeBook(bookId='d721728a5ecb54a1003077a46e12c79f')
+w.removeBook(bookId='7498b5fe5f5a25c2014ee88b1fb6aa03')
